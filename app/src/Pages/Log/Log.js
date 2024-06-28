@@ -6,7 +6,7 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { IconButton, Box, Modal, Typography } from '@mui/material';
-import SessionTimeline from '../../Components/SessionTimeline/SessionTimeline';
+import SessionTimeline from '../../Components/LogComponents/SessionTimeline/SessionTimeline';
 import dayjs from 'dayjs';
 // import { setTimeout } from "timers/promises";
 
@@ -33,7 +33,7 @@ export default function Log(props) {
     // const localTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     const [calendarToggle, setCalendarToggle] = useState(false);
-    const handleOpen = () => setCalendarToggle(true);
+    const handleOpen = () => { setCalendarToggle(true) };
     const handleClose = () => setCalendarToggle(false);
 
     const [date, setDate] = useState(props.currentLogDate || new Date(dayjs()).toString());
@@ -47,8 +47,8 @@ export default function Log(props) {
     }
 
     return (
-        <Box style={{ display: "unset" }}>
-            <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick={handleOpen}>
+        <Box style={{ display: "unset", height: "calc(100vh-56px)" }}>
+            <IconButton style={{ right: "1%", top: "1%", position: "fixed", zIndex: 1 }} size="large" onClick={handleOpen} >
                 <CalendarMonthIcon fontSize="inherit" />
             </IconButton>
 
