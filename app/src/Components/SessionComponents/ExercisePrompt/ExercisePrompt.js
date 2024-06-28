@@ -17,7 +17,7 @@ export default function ExercisePrompt(props) {
         <Box style={{ display: "unset" }}>
             <Stack spacing={7} sx={{ position: "relative", width: "100%", alignItems: "center", paddingTop: "12vmax" }}>
 
-                {/* currentExercise in Session.js is set once the next arrow button is submitted from the state*/}
+                {/* currentExercise in Session.js is set once the next arrow button is submitted from the state IF sameExercise is set to false*/}
                 <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick={() => {if (!sameExercise) { props.setCurrentExercise(currentPromptExercise) }; props.iterateStage();}}>
                     <ArrowForwardIcon fontSize="inherit" />
                 </IconButton>
