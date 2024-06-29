@@ -18,9 +18,15 @@ export default function Session(props) {
     const [minutePicker, setMinutePicker] = useState({ minutes: 3 });
     const [secondPicker, setSecondPicker] = useState({ seconds: 0 });
     const [currentExercise, setCurrentExercise] = useState("");
+    const [timerValue, setTimerValue] = useState({ min: 0, sec: 0, hundreth: 0 });
+    
 
     const iterateStage = () => {
         setCurrentStage(currentStage + 1);
+    }
+
+    const cycleStage = () => {
+        setCurrentStage(1);
     }
     
     return (
@@ -33,17 +39,16 @@ export default function Session(props) {
 
             <Box style={
             currentStage !== 1 ? { display: 'none' } : {display: 'inherit'}}>
-                <TimerSet iterateStage = {iterateStage} minutePicker={minutePicker} secondPicker={secondPicker} setMinutePicker={setMinutePicker} setSecondPicker={setSecondPicker} setTimerValue={props.setTimerValue}/>
+                <TimerSet iterateStage = {iterateStage} minutePicker={minutePicker} secondPicker={secondPicker} setMinutePicker={setMinutePicker} setSecondPicker={setSecondPicker} setTimerValue={setTimerValue}/>
             </Box>
 
-            <Box style={
-            currentStage !== 2 ? { display: 'none' } : {display: 'inherit'}}>
-                <Timer iterateStage = {iterateStage} runTimer = {props.runTimer} timerValue = {props.timerValue} minutePicker={minutePicker} secondPicker={secondPicker} />
-            </Box>
+            { currentStage == 2 && <Box style={{display: 'inherit'}}>
+                <Timer iterateStage = {iterateStage} minutePicker={minutePicker} secondPicker={secondPicker} timerValue={timerValue}/>
+            </Box>}
 
             <Box style={
             currentStage !== 3 ? { display: 'none' } : {display: 'inherit'}}>
-                <ExercisePrompt iterateStage = {iterateStage} setCurrentExercise={setCurrentExercise} currentExercise={currentExercise}/>
+                <ExercisePrompt iterateStage = {cycleStage} setCurrentExercise={setCurrentExercise} currentExercise={currentExercise}/>
             </Box>
             
         </Box>
