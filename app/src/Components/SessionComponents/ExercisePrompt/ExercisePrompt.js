@@ -6,19 +6,22 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 export default function ExercisePrompt(props) {
 
     const [sameExercise, setSameExercise] = useState(true);
+
+    // To keep track of what you typed for this current one 
     const [currentPromptExercise, setCurrentPromptExercise] = useState(props.currentExercise);
 
     // Used to track state of checkbox and set it in sameExercise field
     const handleChecked = (event) => {
         setSameExercise(event.target.checked);
     };
-
+    
     return (
         <Box style={{ display: "unset" }}>
             <Stack spacing={7} sx={{ position: "relative", width: "100%", alignItems: "center", paddingTop: "12vmax" }}>
 
                 {/* currentExercise in Session.js is set once the next arrow button is submitted from the state IF sameExercise is set to false*/}
-                <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick={() => {if (!sameExercise) { props.setCurrentExercise(currentPromptExercise) }; props.iterateStage();}}>
+                {/* Resets prompt exercise and sameExercise checkbox */}
+                <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick={() => {if (!sameExercise) { props.setCurrentExercise(currentPromptExercise); setCurrentPromptExercise(""); setSameExercise(true);}; props.iterateStage();}}>
                     <ArrowForwardIcon fontSize="inherit" />
                 </IconButton>
 
