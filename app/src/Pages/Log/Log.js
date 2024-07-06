@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -35,8 +35,28 @@ export default function Log(props) {
     const [calendarToggle, setCalendarToggle] = useState(false);
     const handleOpen = () => { setCalendarToggle(true) };
     const handleClose = () => setCalendarToggle(false);
-
+    const [sessionInfo, setSessionInfo] = useState({})
     const [date, setDate] = useState(props.currentLogDate || new Date(dayjs()).toString());
+
+    useEffect(() => {
+        const fetchDate = async () => {
+            var currentDate = new Date(date);
+            var dd = String(currentDate.getDate()).padStart(2, '0');
+            var mm = String(currentDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = currentDate.getFullYear();
+            const user = "branboyo";
+            fetch("http://localhost:3001/sessions/session", {method: 'get',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'userName': user,
+                    'queryDate': `${yyyy}-${mm}-${dd}`
+                }
+            }).then(res => {return res.json();
+            }).then(data => {setSessionInfo(data);});
+        }
+        fetchDate();
+        
+    }, [date])
 
     // Shorten the date string
     const formatDate = (dateInput) => {
@@ -72,17 +92,19 @@ export default function Log(props) {
                 </Box>
             </Modal>
 
-            <SessionTimeline exercises={[
-                {
-                    name: "lat pulldowns", sets: [{ weight: 160, reps: 8 }, { weight: 160, reps: 7 }, { weight: 160, reps: 7 }]
-                },
-                {
-                    name: "rows", sets: [{ weight: 160, reps: 8 }, { weight: 160, reps: 7 }, { weight: 160, reps: 7 }]
-                },
-                {
-                    name: "omni grip", sets: [{ weight: 160, reps: 8 }, { weight: 160, reps: 7 }, { weight: 160, reps: 7 }]
-                }
-            ]} date = {formatDate(new Date(date).toString())}>
+            <SessionTimeline 
+            exercises = {sessionInfo}
+                // exercises={[
+                // {
+                //     name: "lat pulldowns", sets: [{ weight: 160, reps: 8 }, { weight: 160, reps: 7 }, { weight: 160, reps: 7 }]
+                // },
+                // {
+                //     name: "rows", sets: [{ weight: 160, reps: 8 }, { weight: 160, reps: 7 }, { weight: 160, reps: 7 }]
+                // },
+                // {
+                //     name: "omni grip", sets: [{ weight: 160, reps: 8 }, { weight: 160, reps: 7 }, { weight: 160, reps: 7 }]
+                // }]} 
+                date = {formatDate(new Date(date).toString())}>
             </SessionTimeline>
 
         </Box>

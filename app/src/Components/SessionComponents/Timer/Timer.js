@@ -19,7 +19,6 @@ export default function Timer(props) {
     // console.log(props.timerValue)
 
     useEffect(() => {
-        console.log("ran")
         setTimerValue(props.timerValue);
     }, [])
     const runTimer = async (min, sec) => {
@@ -57,8 +56,6 @@ export default function Timer(props) {
         }
 
     }
-
-    console.log(timerValue)
     return (
         <Box style={{ display: "flex" }}>
             {/* <Box bgcolor="#1876D1" sx={{ height: "100vh", width: "100vw", margin: "auto" }} /> */}
