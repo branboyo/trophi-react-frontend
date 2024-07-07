@@ -34,7 +34,7 @@ export default function Session(props) {
 
             <Box style={
             currentStage !== 0 ? { display: 'none' } : {display: 'inherit'}}>
-                <SessionFirstRun iterateStage = {iterateStage} setCurrentExercise={setCurrentExercise}/>
+                <SessionFirstRun iterateStage = {iterateStage} setCurrentExercise={setCurrentExercise} currentExercise={currentExercise}/>
             </Box>
 
             <Box style={

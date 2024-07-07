@@ -2,13 +2,15 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { IconButton, Box, Stack, FormControl, FormHelperText, InputAdornment, OutlinedInput, FormControlLabel, Checkbox, TextField } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-
+import dbUtil from '../../../Utilities/dbUtil';
 export default function ExercisePrompt(props) {
 
     const [sameExercise, setSameExercise] = useState(true);
 
     // To keep track of what you typed for this current one 
     const [currentPromptExercise, setCurrentPromptExercise] = useState(props.currentExercise);
+    const [currentReps, setCurrentReps] = useState(0);
+    const [currentWeight, setCurrentWeight] = useState(0);
 
     // Used to track state of checkbox and set it in sameExercise field
     const handleChecked = (event) => {
@@ -21,7 +23,7 @@ export default function ExercisePrompt(props) {
 
                 {/* currentExercise in Session.js is set once the next arrow button is submitted from the state IF sameExercise is set to false*/}
                 {/* Resets prompt exercise and sameExercise checkbox */}
-                <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick={() => {if (!sameExercise) { props.setCurrentExercise(currentPromptExercise); setCurrentPromptExercise(""); setSameExercise(true);}; props.iterateStage();}}>
+                <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick={() => {if (!sameExercise) { dbUtil(new Date(), {exercise: props.currentExercise, reps: currentReps, weight: currentWeight}); props.setCurrentExercise(currentPromptExercise); setCurrentPromptExercise(""); setSameExercise(true);}; props.iterateStage();}}>
                     <ArrowForwardIcon fontSize="inherit" />
                 </IconButton>
 
@@ -53,6 +55,7 @@ export default function ExercisePrompt(props) {
                         inputProps={{
                             'aria-label': 'weight',
                         }}
+                        onChange={(e)=>{setCurrentWeight(e.target.value)}}
                     />
                     <FormHelperText id="outlined-weight-helper-text">Weight</FormHelperText>
                 </FormControl>
@@ -66,6 +69,7 @@ export default function ExercisePrompt(props) {
                         inputProps={{
                             'aria-label': 'reps',
                         }}
+                        onChange={(e)=>{setCurrentReps(e.target.value)}}
                     />
                 </FormControl>
 
