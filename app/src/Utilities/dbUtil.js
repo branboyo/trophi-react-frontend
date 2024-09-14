@@ -1,5 +1,4 @@
-export default async function sendSet(date, set) {
-    console.log(date, set)
+export async function sendSet(date, set) {
     var currentDate = new Date(date);
     var dd = String(currentDate.getDate()).padStart(2, '0');
     var mm = String(currentDate.getMonth() + 1).padStart(2, '0'); //January is 0!
@@ -18,4 +17,23 @@ export default async function sendSet(date, set) {
             weight: set.weight
         })
     })
+}
+
+export async function postLogin(username, password) {
+    let token = await fetch("http://localhost:3001/login/post", {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            user: username,
+            password: password
+        })
+    }).then(response => {
+        return response.json();
+      }).then(jsonResponse => {
+        return jsonResponse;
+      })
+
+      return token.data;
 }

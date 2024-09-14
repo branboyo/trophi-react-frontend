@@ -2,7 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { IconButton, Box, Stack, FormControl, FormHelperText, InputAdornment, OutlinedInput, FormControlLabel, Checkbox, TextField } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-import dbUtil from '../../../Utilities/dbUtil';
+import { sendSet } from '../../../Utilities/dbUtil';
 export default function ExercisePrompt(props) {
 
     const [sameExercise, setSameExercise] = useState(true);
@@ -23,7 +23,7 @@ export default function ExercisePrompt(props) {
 
                 {/* currentExercise in Session.js is set once the next arrow button is submitted from the state IF sameExercise is set to false*/}
                 {/* Resets prompt exercise and sameExercise checkbox */}
-                <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick={() => {if (!sameExercise) { dbUtil(new Date(), {exercise: props.currentExercise, reps: currentReps, weight: currentWeight}); props.setCurrentExercise(currentPromptExercise); setCurrentPromptExercise(""); setSameExercise(true);}; props.iterateStage();}}>
+                <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick={() => {sendSet(new Date(), {exercise: props.currentExercise, reps: currentReps, weight: currentWeight}); if (!sameExercise) { props.setCurrentExercise(currentPromptExercise); setCurrentPromptExercise(""); setSameExercise(true);}; props.iterateStage();}}>
                     <ArrowForwardIcon fontSize="inherit" />
                 </IconButton>
 

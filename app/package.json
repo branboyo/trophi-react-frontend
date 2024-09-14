@@ -16,6 +16,7 @@
     "@vidit-me/react-native-wheely": "^0.7.1",
     "dayjs": "^1.11.11",
     "react": "^18.3.1",
+    "react-cookie": "^7.2.0",
     "react-dom": "^18.3.1",
     "react-mobile-picker": "^1.0.0",
     "react-router": "^6.23.0",
