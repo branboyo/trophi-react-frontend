@@ -56,7 +56,7 @@ export default function Log(props) {
         }
         fetchDate();
         
-    }, [date])
+    }, [date, props.currentPage])
 
     // Shorten the date string
     const formatDate = (dateInput) => {

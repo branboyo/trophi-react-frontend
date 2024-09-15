@@ -14,6 +14,7 @@ export default function ExercisePrompt(props) {
 
     // Used to track state of checkbox and set it in sameExercise field
     const handleChecked = (event) => {
+        console.log(event)
         setSameExercise(event.target.checked);
     };
     
@@ -23,7 +24,18 @@ export default function ExercisePrompt(props) {
 
                 {/* currentExercise in Session.js is set once the next arrow button is submitted from the state IF sameExercise is set to false*/}
                 {/* Resets prompt exercise and sameExercise checkbox */}
-                <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick={() => {sendSet(new Date(), {exercise: props.currentExercise, reps: currentReps, weight: currentWeight}); if (!sameExercise) { props.setCurrentExercise(currentPromptExercise); setCurrentPromptExercise(""); setSameExercise(true);}; props.iterateStage();}}>
+                <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick=
+                {
+                    () => {
+                    sendSet(new Date(), 
+                        {
+                            // If the "same exercise" checkbox is marked, we pull from the one stored in Home (previous set). If not we use the current textbox value
+                            exercise: sameExercise ? props.currentExercise : currentPromptExercise, 
+                            reps: currentReps, 
+                            weight: currentWeight
+                        }); 
+                        if (!sameExercise) { props.setCurrentExercise(currentPromptExercise); setCurrentPromptExercise(""); setSameExercise(true);}; props.iterateStage();}
+                    }>
                     <ArrowForwardIcon fontSize="inherit" />
                 </IconButton>
 
@@ -33,6 +45,7 @@ export default function ExercisePrompt(props) {
                     <FormControlLabel sx={{color: "text.secondary"}} control={<Checkbox defaultChecked checked={sameExercise} onChange={handleChecked}/>} label="Same exercise"/>
                     <TextField
                         id="exercise"
+                        disabled={sameExercise ? true : false}
                         aria-describedby="exercise-helper-text"
                         inputProps={{
                             'aria-label': 'exercise',
@@ -40,7 +53,7 @@ export default function ExercisePrompt(props) {
                         // disabled={sameExercise}
                         defaultValue={sameExercise ? props.currentExercise : ""}
                         value={sameExercise ? props.currentExercise : currentPromptExercise}
-                        onChange={(e)=>{setCurrentPromptExercise(e.target.value)}}
+                        onChange={(e)=>{console.log(e.target.value); setCurrentPromptExercise(e.target.value)}}
                     />
 
                     <FormHelperText id="outlined-exercise-helper-text">Exercise</FormHelperText>

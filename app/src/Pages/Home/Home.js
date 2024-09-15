@@ -33,7 +33,7 @@ export default function Home() {
             <CssBaseline />
             <Box sx={{ bgcolor: '', height: '100%', width: '100%' }}>
                 <Box style={currentPage !== 0 ? { display: 'none' } : { display: 'initial' }}>
-                    <Log setCurrentLogDate={setCurrentLogDate} currentLogDate={currentLogDate} />
+                    <Log setCurrentLogDate={setCurrentLogDate} currentLogDate={currentLogDate} currentPage={currentPage}/>
                 </Box>
                 <Box style={currentPage !== 1 ? { display: 'none' } : { display: 'initial' }}>
                     <Session setCurrentLogDate={setCurrentLogDate} currentLogDate={currentLogDate} />
