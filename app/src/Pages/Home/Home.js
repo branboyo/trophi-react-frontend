@@ -20,7 +20,7 @@ export default function Home() {
         if(cookie == undefined) {
             setCurrentPage(-1)
         } else {
-            console.log(cookie)
+            console.log(cookie);
             setCurrentPage(1);
         }
     }, [cookies])
@@ -33,10 +33,10 @@ export default function Home() {
             <CssBaseline />
             <Box sx={{ bgcolor: '', height: '100%', width: '100%' }}>
                 <Box style={currentPage !== 0 ? { display: 'none' } : { display: 'initial' }}>
-                    <Log setCurrentLogDate={setCurrentLogDate} currentLogDate={currentLogDate} currentPage={currentPage}/>
+                    <Log setCurrentLogDate={setCurrentLogDate} currentLogDate={currentLogDate} currentPage={currentPage} cookies={cookies}/>
                 </Box>
                 <Box style={currentPage !== 1 ? { display: 'none' } : { display: 'initial' }}>
-                    <Session setCurrentLogDate={setCurrentLogDate} currentLogDate={currentLogDate} />
+                    <Session setCurrentLogDate={setCurrentLogDate} currentLogDate={currentLogDate} cookies={cookies}/>
                 </Box>
 
                 <Box style={currentPage !== -1 ? { display: 'none' } : { display: 'initial' }}>

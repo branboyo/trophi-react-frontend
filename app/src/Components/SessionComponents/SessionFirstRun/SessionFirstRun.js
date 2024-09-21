@@ -11,7 +11,7 @@ export default function SessionFirstRun(props) {
         <Box style={{ display: "unset" }}>
             <Stack spacing={7} sx={{ position: "relative", width: "100%", alignItems: "center", paddingTop: "12vmax" }}>
 
-                <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick={(e) => {sendSet(new Date(), {exercise: props.currentExercise, reps: currentReps, weight: currentWeight}); props.iterateStage();}}>
+                <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick={(e) => {sendSet(new Date(), {exercise: props.currentExercise, reps: currentReps, weight: currentWeight}, props.cookies); props.iterateStage();}}>
                     <ArrowForwardIcon fontSize="inherit" />
                 </IconButton>
                 

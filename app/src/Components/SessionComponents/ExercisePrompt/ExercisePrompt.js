@@ -33,7 +33,7 @@ export default function ExercisePrompt(props) {
                             exercise: sameExercise ? props.currentExercise : currentPromptExercise, 
                             reps: currentReps, 
                             weight: currentWeight
-                        }); 
+                        }, props.cookies); 
                         if (!sameExercise) { props.setCurrentExercise(currentPromptExercise); setCurrentPromptExercise(""); setSameExercise(true);}; props.iterateStage();}
                     }>
                     <ArrowForwardIcon fontSize="inherit" />

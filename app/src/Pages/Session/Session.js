@@ -1,13 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import { IconButton, Box, Modal, Typography, Button } from '@mui/material';
+import { Box } from '@mui/material';
 
-import SessionTimeline from '../../Components/LogComponents/SessionTimeline/SessionTimeline';
 import SessionFirstRun from '../../Components/SessionComponents/SessionFirstRun/SessionFirstRun';
 import TimerSet from '../../Components/SessionComponents/TimerSet/TimerSet';
 import Timer from '../../Components/SessionComponents/Timer/Timer';
@@ -34,7 +28,7 @@ export default function Session(props) {
 
             <Box style={
             currentStage !== 0 ? { display: 'none' } : {display: 'inherit'}}>
-                <SessionFirstRun iterateStage = {iterateStage} setCurrentExercise={setCurrentExercise} currentExercise={currentExercise}/>
+                <SessionFirstRun iterateStage = {iterateStage} setCurrentExercise={setCurrentExercise} currentExercise={currentExercise} cookies={props.cookies}/>
             </Box>
 
             <Box style={
@@ -48,7 +42,7 @@ export default function Session(props) {
 
             <Box style={
             currentStage !== 3 ? { display: 'none' } : {display: 'inherit'}}>
-                <ExercisePrompt iterateStage = {cycleStage} setCurrentExercise={setCurrentExercise} currentExercise={currentExercise}/>
+                <ExercisePrompt iterateStage = {cycleStage} setCurrentExercise={setCurrentExercise} currentExercise={currentExercise} cookies={props.cookies}/>
             </Box>
             
         </Box>

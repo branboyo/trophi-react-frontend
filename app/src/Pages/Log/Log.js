@@ -44,15 +44,19 @@ export default function Log(props) {
             var dd = String(currentDate.getDate()).padStart(2, '0');
             var mm = String(currentDate.getMonth() + 1).padStart(2, '0'); //January is 0!
             var yyyy = currentDate.getFullYear();
-            const user = "branboyo";
-            fetch("http://localhost:3001/sessions/session", {method: 'get',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'userName': user,
-                    'queryDate': `${yyyy}-${mm}-${dd}`
-                }
-            }).then(res => {return res.json();
-            }).then(data => {setSessionInfo(data);});
+            var token = props.cookies['token']
+            const user = props.cookies['username'];
+            if(token !== undefined && user !== undefined) {
+                fetch("http://localhost:3001/sessions/session", {method: 'get',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'userName': user,
+                        'queryDate': `${yyyy}-${mm}-${dd}`,
+                        'token': token
+                    }
+                }).then(res => {return res.json();
+                }).then(data => {setSessionInfo(data);});
+            }
         }
         fetchDate();
         
