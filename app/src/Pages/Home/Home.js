@@ -14,6 +14,8 @@ export default function Home() {
     const [cookies, setCookies] = useCookies(['token', 'username', 'pn']);
     // State used for date persistence when Log toggles on and off
     const [currentLogDate, setCurrentLogDate] = useState(dayjs());
+    // Used to check if the state outlasts the session date -> reset back to "SessionFirstRun" if a new day has passed
+    const [currentSessionDate, setCurrentSessionDate] = useState(undefined);
     
     useEffect(() => {
         const cookie = cookies.token;
@@ -36,7 +38,7 @@ export default function Home() {
                     <Log setCurrentLogDate={setCurrentLogDate} currentLogDate={currentLogDate} currentPage={currentPage} cookies={cookies}/>
                 </Box>
                 <Box style={currentPage !== 1 ? { display: 'none' } : { display: 'initial' }}>
-                    <Session setCurrentLogDate={setCurrentLogDate} currentLogDate={currentLogDate} cookies={cookies}/>
+                    <Session setCurrentLogDate={setCurrentLogDate} currentLogDate={currentLogDate} cookies={cookies} currentSessionDate={currentSessionDate} setCurrentSessionDate={setCurrentSessionDate}/>
                 </Box>
 
                 <Box style={currentPage !== -1 ? { display: 'none' } : { display: 'initial' }}>

@@ -7,11 +7,18 @@ import { sendSet } from '../../../Utilities/dbUtil';
 export default function SessionFirstRun(props) {
     const [currentReps, setCurrentReps] = useState(0);
     const [currentWeight, setCurrentWeight] = useState(0);
+    const [currentDate, setCurrentDate] = useState(new Date());
+
+    useEffect(() => {
+        const date = new Date(Date.now());
+        setCurrentDate(date);
+    })
+
     return (
         <Box style={{ display: "unset" }}>
             <Stack spacing={7} sx={{ position: "relative", width: "100%", alignItems: "center", paddingTop: "12vmax" }}>
 
-                <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick={(e) => {sendSet(new Date(), {exercise: props.currentExercise, reps: currentReps, weight: currentWeight}, props.cookies); props.iterateStage();}}>
+                <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick={(e) => {sendSet(currentDate, {exercise: props.currentExercise, reps: currentReps, weight: currentWeight}, props.cookies); props.iterateStage();}}>
                     <ArrowForwardIcon fontSize="inherit" />
                 </IconButton>
                 

@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { IconButton, Box, Stack, FormControl, FormHelperText, InputAdornment, OutlinedInput, FormControlLabel, Checkbox, TextField } from '@mui/material';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { sendSet } from '../../../Utilities/dbUtil';
+
 export default function ExercisePrompt(props) {
 
     const [sameExercise, setSameExercise] = useState(true);
@@ -11,7 +12,12 @@ export default function ExercisePrompt(props) {
     const [currentPromptExercise, setCurrentPromptExercise] = useState(props.currentExercise);
     const [currentReps, setCurrentReps] = useState(0);
     const [currentWeight, setCurrentWeight] = useState(0);
+    const [currentDate, setCurrentDate] = useState(new Date());
 
+    useEffect(() => {
+        const date = new Date(Date.now());
+        setCurrentDate(date);
+    })
     // Used to track state of checkbox and set it in sameExercise field
     const handleChecked = (event) => {
         console.log(event)
@@ -27,7 +33,7 @@ export default function ExercisePrompt(props) {
                 <IconButton style={{ right: "1%", top: "1%", position: "fixed" }} size="large" onClick=
                 {
                     () => {
-                    sendSet(new Date(), 
+                    sendSet(currentDate, 
                         {
                             // If the "same exercise" checkbox is marked, we pull from the one stored in Home (previous set). If not we use the current textbox value
                             exercise: sameExercise ? props.currentExercise : currentPromptExercise, 
