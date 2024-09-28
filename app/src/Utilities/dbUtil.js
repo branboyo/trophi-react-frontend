@@ -6,7 +6,7 @@ export async function sendSet(date, set, cookie) {
     const user = cookie['username'];
     const token = cookie['token'];
 
-    fetch("http://localhost:3001/sessions/sessionPost", {
+    fetch("https://trophi-express-api-1.onrender.com/sessions/sessionPost", {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
@@ -24,7 +24,7 @@ export async function sendSet(date, set, cookie) {
 }
 
 export async function postLogin(username, password, cookie) {
-    let token = await fetch("http://localhost:3001/login/post", {
+    let token = await fetch("https://trophi-express-api-1.onrender.com/login/post", {
         method: 'post',
         headers: {
             'Content-Type': 'application/json',
