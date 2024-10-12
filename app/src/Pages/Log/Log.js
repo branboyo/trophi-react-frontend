@@ -48,7 +48,7 @@ export default function Log(props) {
             var token = props.cookies['token']
             const user = props.cookies['username'];
             if(token !== undefined && user !== undefined) {
-                fetch("https://trophi-express-api-1.onrender.com/sessions/session", {method: 'get',
+                fetch("http://localhost:3001/sessions/session", {method: 'get',
                     headers: {
                         'Content-Type': 'application/json',
                         'userName': user,
